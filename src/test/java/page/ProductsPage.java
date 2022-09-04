@@ -12,7 +12,7 @@ public class ProductsPage extends HomePage {
     private final String PRODUCT_CONTAINER_LOCATOR
             = "//*[@class='product_img_link' and @title='%s']/ancestor::div[@class='product-container']";
     private final String PRODUCT_CONTAINER_LOCATOR_PRICE
-            = "//span[@class='price product-price' and contains(text(),'61,19 ')] /ancestor::div[@class='product-container']";
+            = "//span[@class='price product-price' and contains(text(),'%s ')] /ancestor::div[@class='product-container']";
 
     public ProductsPage(WebDriver driver) {
         super(driver);

@@ -5,9 +5,9 @@ import lombok.Data;
 
 @Data
 @Builder
-public class Authentication {
+public class User {
 
-        public static Authentication AuthenticationBuilder;
+        public static User userBuilder;
         private String title;
         private String lastName;
         private String firstName;

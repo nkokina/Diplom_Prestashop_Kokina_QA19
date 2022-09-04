@@ -10,12 +10,12 @@ import utils.PropertyReader;
 @Log4j2
 public abstract class HomePage extends BasePage {
    protected static String URL = PropertyReader.getProperty("prestashop.base_url");
-    protected By LOGIN_PAGE_LOCATOR = By.cssSelector("[title='Войти в учетную запись покупателя']");
+    protected By LOGIN_PAGE_LOCATOR = By.cssSelector("a.login");
     protected By SEARCH_LOCATOR = By.cssSelector("#search_query_top");
     protected By  WOMEN_BUTTON= By.cssSelector(".sf-with-ul[title='Women']");
     protected By  DRESSES_BUTTON= By.cssSelector(".sf-with-ul[title='Dresses']");
     protected By  TSHIRTS_BUTTON= By.cssSelector(".sf-with-ul[title='T-shirts']");
-    protected By SHOPPING_CART = By.cssSelector("[title='Посмотреть корзину']");
+    protected By SHOPPING_CART = By.xpath("//div[@class='shopping_cart']/./a");
     public HomePage(WebDriver driver) {
         super(driver);
     }
