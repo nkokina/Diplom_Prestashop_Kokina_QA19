@@ -1,30 +1,36 @@
 package tests;
 
 import com.github.javafaker.Faker;
+import enums.Title;
+import models.User;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.testng.ITestContext;
 import org.testng.annotations.*;
 import page.*;
-import utils.PropertyReader;
+import page.modals.NewAddressesModal;
+import page.modals.NewAuthenticationModal;
 
 import java.util.concurrent.TimeUnit;
-
 
 @Listeners({TestListener.class})
 public class BaseTest {
 
-    protected final static String EMAIL = PropertyReader.getProperty("prestashop.login");
-    protected final static String PASSWORD = PropertyReader.getProperty("prestashop.password");
-
+    protected static Faker faker = new Faker();
     protected WebDriver driver;
     protected LoginPage loginPage;
     protected AuthenticationPage authenticationPage;
+    protected WomenPage womenPage;
     protected MyAccountPage myAccountPage;
     protected SearchPage searchPage;
     protected ProductsPage productsPage;
-    protected Faker faker;
+    protected NewAuthenticationModal newAuthenticationModal;
+    protected NewAddressesModal newAddressesModal;
+    protected ItemDetailsPage itemDetailsPage;
+    protected BasketPage basketPage;
+    protected String userEmail;
 
+    protected String userPassword;
 
     @BeforeClass(alwaysRun = true)
     public void setUp(ITestContext testContext) throws Exception {
@@ -37,9 +43,13 @@ public class BaseTest {
         loginPage = new LoginPage(driver);
         authenticationPage = new AuthenticationPage(driver);
         myAccountPage = new MyAccountPage(driver);
-        searchPage=new SearchPage(driver);
-        productsPage=new ProductsPage(driver);
-        faker = new Faker();
+        searchPage = new SearchPage(driver);
+        productsPage = new ProductsPage(driver);
+        newAuthenticationModal = new NewAuthenticationModal(driver);
+        womenPage = new WomenPage(driver);
+        newAddressesModal = new NewAddressesModal(driver);
+        itemDetailsPage = new ItemDetailsPage(driver);
+        basketPage = new BasketPage(driver);
     }
 
     @BeforeMethod(alwaysRun = true)
@@ -47,15 +57,31 @@ public class BaseTest {
         loginPage.open();
     }
 
+    @BeforeMethod(alwaysRun = true)
+    public void userRegistration() {
+        userEmail = faker.internet().emailAddress();
+        userPassword = faker.internet().password();
+        loginPage.clickLoginButton();
+        loginPage.setEmailCreate(userEmail);
+        loginPage.clickSubmitInCreateButton();
+        authenticationPage.waitForElementDisplayed();
+        User testUser = User.builder().title(Title.MS).lastName(faker.name().lastName())
+                .firstName(faker.name().firstName()).password(userPassword).data("23")
+                .months("5").years("2008").build();
+        newAuthenticationModal.fillingOutTheForm(testUser);
+        authenticationPage.clickRegisterButton();
+    }
+
     @AfterMethod(alwaysRun = true)
     public void clearCookies() {
         driver.manage().deleteAllCookies();
-        ((JavascriptExecutor) driver).executeScript(String.format("window.localStorage.clear();"));
-        ((JavascriptExecutor) driver).executeScript(String.format("window.sessionStorage.clear();"));
+        ((JavascriptExecutor) driver).executeScript("window.localStorage.clear();");
+        ((JavascriptExecutor) driver).executeScript("window.sessionStorage.clear();");
     }
 
     @AfterClass(alwaysRun = true)
     public void tearDown() {
         driver.quit();
     }
+
 }

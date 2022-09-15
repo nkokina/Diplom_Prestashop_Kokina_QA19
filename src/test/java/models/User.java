@@ -1,5 +1,6 @@
 package models;
 
+import enums.Title;
 import lombok.Builder;
 import lombok.Data;
 
@@ -8,7 +9,7 @@ import lombok.Data;
 public class User {
 
         public static User userBuilder;
-        private String title;
+        private Title title;
         private String lastName;
         private String firstName;
         private String password;

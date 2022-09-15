@@ -9,15 +9,4 @@ public enum Title {
         this.name = name;
     }
 
-    public String getName() {
-        return this.name();
-    }
-    public static Title fromString(String value) {
-        for (Title contactIndustry : Title.values()) {
-            if (contactIndustry.name.equals(value)) {
-                return contactIndustry;
-            }
-        }
-        return null;
-    }
 }
