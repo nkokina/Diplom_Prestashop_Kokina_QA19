@@ -59,7 +59,6 @@ public class BaseTest {
         loginPage.open();
     }
 
-    //    @BeforeMethod(alwaysRun = true)
     public void userRegistration() {
         userEmail = faker.internet().emailAddress();
         userPassword = faker.internet().password();

@@ -22,7 +22,7 @@ public class LoginTest extends BaseTest {
         newAuthenticationModal.fillingOutTheForm(testUser);
         authenticationPage.clickRegisterButton();
         Assert.assertTrue(myAccountPage.isMessageDisplayed(), "An error occurred during registration");
-//        loginPage.clickClosedLoginButton();
+
     }
 
     @Test(groups = {"Negative"}, dataProvider = "negativeNewUserRegistrationTestData", retryAnalyzer = Retry.class)
@@ -33,7 +33,7 @@ public class LoginTest extends BaseTest {
         loginPage.clickSubmitInCreateButton();
         Assert.assertTrue(loginPage.isErrorMessageDisplayed());
         Assert.assertFalse(loginPage.getErrorMessageDisplayed().isEmpty(), expectedErrorMessage);
-//        loginPage.clickClosedLoginButton();
+
     }
 
     @Test(groups = {"Smoke"}, retryAnalyzer = Retry.class)
@@ -42,7 +42,7 @@ public class LoginTest extends BaseTest {
         loginPage.clickLoginButton();
         loginPage.login(userEmail, userPassword);
         Assert.assertTrue(myAccountPage.isMessageDisplayed(), "An error occurred during registration");
-//        loginPage.clickClosedLoginButton();
+
     }
 
     @DataProvider
