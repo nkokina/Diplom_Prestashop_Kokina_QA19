@@ -10,6 +10,8 @@ public class SearchTest extends BaseTest {
     @Test(groups = {"Regression"}, retryAnalyzer = Retry.class)
     @Description("Registered user product search test")
     public void searchItemTest() {
+        loginPage.clickLoginButton();
+        loginPage.login(userEmail, userPassword);
         searchPage.searchItemToText(ITEM_NAME);
         searchPage.waitForElementDisplayed();
         Assert.assertTrue(searchPage.isIconInformationDisplayed(), "Search failed");
@@ -26,9 +28,11 @@ public class SearchTest extends BaseTest {
     @Test(groups = {"Negative"}, retryAnalyzer = Retry.class)
     @Description("Negative product search test")
     public void negativeSearchItemTest() {
+        loginPage.clickLoginButton();
+        loginPage.login(userEmail, userPassword);
         searchPage.searchItemToText("");
         searchPage.waitForElementDisplayed();
         Assert.assertTrue(searchPage.isErrorMessageDisplayed());
-        Assert.assertFalse(searchPage.getErrorMessageDisplayed().isEmpty(), "Field are empty");
+        Assert.assertEquals(searchPage.getErrorMessageDisplayed(), "Please enter a search keyword", "Field are empty");
     }
 }

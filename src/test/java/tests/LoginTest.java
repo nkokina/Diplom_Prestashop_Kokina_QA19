@@ -14,7 +14,6 @@ public class LoginTest extends BaseTest {
     @Test(groups = {"Smoke"}, dataProvider = "newUserRegistrationData", retryAnalyzer = Retry.class)
     @Description("Successful new user registration")
     public void newUserRegistrationTest(String email, User testUser) {
-        loginPage.clickClosedLoginButton();
         loginPage.clickLoginButton();
         loginPage.setEmailCreate(email);
         loginPage.clickSubmitInCreateButton();
@@ -23,26 +22,27 @@ public class LoginTest extends BaseTest {
         newAuthenticationModal.fillingOutTheForm(testUser);
         authenticationPage.clickRegisterButton();
         Assert.assertTrue(myAccountPage.isMessageDisplayed(), "An error occurred during registration");
+//        loginPage.clickClosedLoginButton();
     }
 
     @Test(groups = {"Negative"}, dataProvider = "negativeNewUserRegistrationTestData", retryAnalyzer = Retry.class)
     @Description("Test for entering incorrect (missing) data for registering a new user")
     public void negativeNewUserRegistrationTest(String email, String expectedErrorMessage) {
-        loginPage.clickClosedLoginButton();
         loginPage.clickLoginButton();
         loginPage.setEmailCreate(email);
         loginPage.clickSubmitInCreateButton();
         Assert.assertTrue(loginPage.isErrorMessageDisplayed());
         Assert.assertFalse(loginPage.getErrorMessageDisplayed().isEmpty(), expectedErrorMessage);
+//        loginPage.clickClosedLoginButton();
     }
 
     @Test(groups = {"Smoke"}, retryAnalyzer = Retry.class)
     @Description("Successful auto-registration of a registered user")
     public void userAuthorizationTest() {
-        loginPage.clickClosedLoginButton();
         loginPage.clickLoginButton();
         loginPage.login(userEmail, userPassword);
         Assert.assertTrue(myAccountPage.isMessageDisplayed(), "An error occurred during registration");
+//        loginPage.clickClosedLoginButton();
     }
 
     @DataProvider

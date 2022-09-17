@@ -20,6 +20,7 @@ public class BasketPage extends HomePage {
     private final By TERMS_OF_SERVICE_LOCATOR = By.cssSelector("#cgv");
     private final By PAYMENT_LOCATOR = By.cssSelector(".alert.alert-warning");
     private final By SAVE_BUTTON = By.cssSelector("[name='submitAddress']");
+    private final By CLOSE_MESSAGE = By.cssSelector(".fancybox-item.fancybox-close");
 
     public BasketPage(WebDriver driver) {
         super(driver);
@@ -33,9 +34,16 @@ public class BasketPage extends HomePage {
         return driver.findElement(ITEM_PRICE_IN_BASKET).getText();
     }
 
+    @Step("Clicking a to remove an item from the cart button")
     public void clickDeleteItemButton() {
         log.info("Clicking a to remove an item from the cart button");
         driver.findElement(DELETE_ITEM).click();
+    }
+
+    @Step("Clicking a to close error message button")
+    public void clickCloseMessageButton() {
+        log.info("Clicking a to close error message button");
+        driver.findElement(CLOSE_MESSAGE).click();
     }
 
     @Step("Clicking a to remove an item from the cart button")
@@ -61,6 +69,7 @@ public class BasketPage extends HomePage {
         log.info("Clicking a button to terms of service");
         driver.findElement(TERMS_OF_SERVICE_LOCATOR).click();
     }
+
     @Step("Clicking a button to save addresses")
     public void clickSaveAddresses() {
         log.info("Clicking a button to save addresses");

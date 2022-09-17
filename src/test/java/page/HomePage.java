@@ -17,7 +17,9 @@ public abstract class HomePage extends BasePage {
     protected By WOMEN_BUTTON = By.cssSelector(".sf-with-ul[title='Women']");
     protected By SHOPPING_CART = By.xpath("//div[@class='shopping_cart']/./a");
     protected By CLOSED_LOCATOR = By.cssSelector("a.logout");
+    protected By MY_ACCOUNT_LOCATOR = By.cssSelector(".account");
     protected By WAIT_ITEM_CART = By.cssSelector(".ajax_cart_product_txt.unvisible[style = 'display: inline;']");
+
     public HomePage(WebDriver driver) {
         super(driver);
     }
@@ -26,6 +28,12 @@ public abstract class HomePage extends BasePage {
     public void clickLoginButton() {
         log.info("Pressing the login button");
         driver.findElement(LOGIN_PAGE_LOCATOR).click();
+    }
+
+    @Step("Pressing the My Account button")
+    public void clickMyAccountButton() {
+        log.info("Pressing the login button");
+        driver.findElement(MY_ACCOUNT_LOCATOR).click();
     }
 
     @Step("Entering a product in the search bar")

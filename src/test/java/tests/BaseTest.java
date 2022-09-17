@@ -50,6 +50,8 @@ public class BaseTest {
         newAddressesModal = new NewAddressesModal(driver);
         itemDetailsPage = new ItemDetailsPage(driver);
         basketPage = new BasketPage(driver);
+        navigate();
+        userRegistration();
     }
 
     @BeforeMethod(alwaysRun = true)
@@ -57,7 +59,7 @@ public class BaseTest {
         loginPage.open();
     }
 
-    @BeforeMethod(alwaysRun = true)
+    //    @BeforeMethod(alwaysRun = true)
     public void userRegistration() {
         userEmail = faker.internet().emailAddress();
         userPassword = faker.internet().password();
@@ -70,6 +72,7 @@ public class BaseTest {
                 .months("5").years("2008").build();
         newAuthenticationModal.fillingOutTheForm(testUser);
         authenticationPage.clickRegisterButton();
+        loginPage.clickClosedLoginButton();
     }
 
     @AfterMethod(alwaysRun = true)

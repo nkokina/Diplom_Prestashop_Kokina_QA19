@@ -15,6 +15,8 @@ public class ItemDetailsTest extends BaseTest {
     @Test(groups = {"Regression"}, retryAnalyzer = Retry.class)
     @Description("Test for checking the price and the name of the product in the general catalog and a separate product page")
     public void verifyItemNameAndPricePageTest() {
+        loginPage.clickLoginButton();
+        loginPage.login(userEmail, userPassword);
         myAccountPage.clickHomeButton();
         productsPage.clickWomenButton();
         womenPage.waitForElementDisplayed();
@@ -29,6 +31,8 @@ public class ItemDetailsTest extends BaseTest {
     @Test(groups = {"Smoke"}, retryAnalyzer = Retry.class)
     @Description("Add to cart test")
     public void addToCartTest() {
+        loginPage.clickLoginButton();
+        loginPage.login(userEmail, userPassword);
         myAccountPage.clickHomeButton();
         productsPage.clickWomenButton();
         womenPage.waitForElementDisplayed();
@@ -46,6 +50,8 @@ public class ItemDetailsTest extends BaseTest {
     @Test(groups = {"Smoke"}, retryAnalyzer = Retry.class, dataProvider = "userAddAddressesData")
     @Description("Product purchase test")
     public void productPurchaseTest(Addresses yourAddresses) {
+        loginPage.clickLoginButton();
+        loginPage.login(userEmail, userPassword);
         myAccountPage.clickHomeButton();
         productsPage.clickWomenButton();
         womenPage.waitForElementDisplayed();
@@ -62,11 +68,17 @@ public class ItemDetailsTest extends BaseTest {
         basketPage.clickTermsOfService();
         basketPage.clickProceedCarrier();
         Assert.assertTrue(basketPage.isMessageDisplayed(), "The inscription did not appear");
+        basketPage.clickMyAccountButton();
+        myAccountPage.clickAddressesButton();
+        myAccountPage.clickDeleteAddressesButton();
+        myAccountPage.waitForElementDisplayed();
     }
 
     @Test(groups = {"Negative"}, retryAnalyzer = Retry.class, dataProvider = "userAddAddressesData")
     @Description("Negative product purchase test")
     public void negativeProductPurchaseTest(Addresses yourAddresses) {
+        loginPage.clickLoginButton();
+        loginPage.login(userEmail, userPassword);
         myAccountPage.clickHomeButton();
         productsPage.clickWomenButton();
         womenPage.waitForElementDisplayed();
@@ -82,12 +94,19 @@ public class ItemDetailsTest extends BaseTest {
         basketPage.clickProceedAddresses();
         basketPage.clickProceedCarrier();
         Assert.assertTrue(basketPage.isErrorMessageDisplayed());
-        Assert.assertFalse(basketPage.getErrorMessageDisplayed().isEmpty(), "The message 'You must agree to the terms of service before continuing' did not appear.");
+        Assert.assertEquals(basketPage.getErrorMessageDisplayed(), "You must agree to the terms of service before continuing.", "The message 'You must agree to the terms of service before continuing' did not appear.");
+        basketPage.clickCloseMessageButton();
+        basketPage.clickMyAccountButton();
+        myAccountPage.clickAddressesButton();
+        myAccountPage.clickDeleteAddressesButton();
+        myAccountPage.waitForElementDisplayed();
     }
 
     @Test(groups = {"Regression"}, retryAnalyzer = Retry.class)
     @Description("Cart deletion test")
     public void cartDeletionTest() {
+        loginPage.clickLoginButton();
+        loginPage.login(userEmail, userPassword);
         myAccountPage.clickHomeButton();
         productsPage.clickWomenButton();
         womenPage.waitForElementDisplayed();
@@ -105,6 +124,8 @@ public class ItemDetailsTest extends BaseTest {
     @Test(groups = {"Smoke"}, dataProvider = "inventoryItemsTestData", retryAnalyzer = Retry.class)
     @Description("Test for checking goods in the catalog")
     public void checkingGoodsInTheCatalogTest(String nameItem, String priceItem) {
+        loginPage.clickLoginButton();
+        loginPage.login(userEmail, userPassword);
         myAccountPage.clickHomeButton();
         productsPage.clickWomenButton();
         womenPage.waitForElementDisplayed();
@@ -135,7 +156,7 @@ public class ItemDetailsTest extends BaseTest {
         return new Object[][]{
                 {Addresses.builder().lastName(faker.name().lastName()).firstName(faker.name().firstName()).company(faker.company().name())
                         .address("Minskay").postCode("11111").city(faker.address().city())
-                        .country("21").phone(faker.phoneNumber().phoneNumber()).mobile(faker.phoneNumber().phoneNumber())
+                        .country("21").phone("25588445").mobile(faker.phoneNumber().phoneNumber())
                         .state("13").alias(faker.name().title()).build()},
         };
     }
