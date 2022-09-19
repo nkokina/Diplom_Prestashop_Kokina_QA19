@@ -1,10 +1,9 @@
 package page;
 
+import io.qameta.allure.Step;
 import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.testng.Assert;
-import utils.PropertyReader;
 
 @Log4j2
 public class LoginPage extends HomePage {
@@ -20,34 +19,40 @@ public class LoginPage extends HomePage {
         super(driver);
     }
 
+    @Step("Setting registered email = {registeredEmail}")
     public void setRegisteredEmail(String registeredEmail) {
-        log.info("Login to site with registeredEmail %s", registeredEmail);
+        log.info(String.format("Setting registered email %s", registeredEmail));
         driver.findElement(REGISTERED_EMAIL).sendKeys(registeredEmail);
     }
 
+    @Step("Setting registered password = {registeredPassword}")
     public void setRegisteredPassword(String registeredPassword) {
-        log.info("Login to site with registeredPassword %s", registeredPassword);
+        log.info(String.format("Setting registered password %s", registeredPassword));
         driver.findElement(REGISTERED_PASSWORD).sendKeys(registeredPassword);
     }
 
+    @Step("Setting email Create = {emailCreate}")
     public void setEmailCreate(String emailCreate) {
-        log.info("Login to site with emailCreate %s", emailCreate);
+        log.info(String.format("Setting email Create %s", emailCreate));
         driver.findElement(EMAIL_CREATE).sendKeys(emailCreate);
     }
 
+    @Step("Pressing create an account button")
     public void clickSubmitInCreateButton() {
-        log.info("Pressing the submit in create button");
+        log.info("Pressing create an account button");
         driver.findElement(SUBMIT_CREATE).click();
     }
 
+    @Step("Pressing sing in button")
     public void clickRegisteredButton() {
-        log.info("Pressing the registered button");
+        log.info("Pressing sing in button");
         driver.findElement(SUBMIT_LOGIN).click();
     }
 
+    @Step("Login to site with email = {email} and password = {password}, and pressing the registered button")
     public void login(String email, String password) {
-        log.info("Login to site with username %s and password %s, and pressing the registered button",
-                email, password);
+        log.info(String.format("Login to site with email %s and password %s, and pressing the registered button",
+                email, password));
         clickLoginButton();
         setRegisteredEmail(email);
         setRegisteredPassword(password);
@@ -61,5 +66,4 @@ public class LoginPage extends HomePage {
     public String getErrorMessageDisplayed() {
         return driver.findElement(CREATE_ERROR).getText();
     }
-
 }

@@ -1,9 +1,9 @@
 package page;
 
+import io.qameta.allure.Step;
 import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 @Log4j2
@@ -20,12 +20,13 @@ public class AuthenticationPage extends HomePage {
         return driver.findElement(ICON_INFORMATION_LOCATOR).isDisplayed();
     }
 
-    public void waitForElementDisplayed() {
+    public void waitForOpenAuthenticationPage() {
         wait.until(ExpectedConditions.visibilityOfElementLocated(ICON_INFORMATION_LOCATOR));
     }
 
+    @Step("Pressing the registered button")
     public void clickRegisterButton() {
-        log.info("Pressing the registered button ");
+        log.info("Pressing the registered button");
         driver.findElement(BUTTON_LOCATOR).click();
     }
 }
