@@ -65,7 +65,7 @@ public class BaseTest {
         loginPage.clickLoginButton();
         loginPage.setEmailCreate(userEmail);
         loginPage.clickSubmitInCreateButton();
-        authenticationPage.waitForElementDisplayed();
+        authenticationPage.waitForOpenAuthenticationPage();
         User testUser = User.builder().title(Title.MS).lastName(faker.name().lastName())
                 .firstName(faker.name().firstName()).password(userPassword).data("23")
                 .months("5").years("2008").build();

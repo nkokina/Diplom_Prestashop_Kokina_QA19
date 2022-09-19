@@ -17,7 +17,7 @@ public class LoginTest extends BaseTest {
         loginPage.clickLoginButton();
         loginPage.setEmailCreate(email);
         loginPage.clickSubmitInCreateButton();
-        authenticationPage.waitForElementDisplayed();
+        authenticationPage.waitForOpenAuthenticationPage();
         Assert.assertTrue(authenticationPage.isIconInformationDisplayed(), "Error login test");
         newAuthenticationModal.fillingOutTheForm(testUser);
         authenticationPage.clickRegisterButton();

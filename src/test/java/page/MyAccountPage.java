@@ -40,7 +40,7 @@ public class MyAccountPage extends HomePage {
         driver.switchTo().alert().accept();
     }
 
-    public void waitForElementDisplayed() {
+    public void waitForDeleteAddresses() {
         wait.until(ExpectedConditions.visibilityOfElementLocated(ALERT_LOCATOR));
     }
 }

@@ -30,7 +30,7 @@ public class ItemDetailsPage extends HomePage {
         driver.findElement(ADD_TO_CAR_ITEM_BUTTON).click();
     }
 
-    public void waitForElementDisplayed() {
+    public void waitForOpenItemDetailsPage() {
         wait.until(ExpectedConditions.visibilityOfElementLocated(ADD_TO_CAR_ITEM_BUTTON));
     }
 }

@@ -20,7 +20,7 @@ public class AuthenticationPage extends HomePage {
         return driver.findElement(ICON_INFORMATION_LOCATOR).isDisplayed();
     }
 
-    public void waitForElementDisplayed() {
+    public void waitForOpenAuthenticationPage() {
         wait.until(ExpectedConditions.visibilityOfElementLocated(ICON_INFORMATION_LOCATOR));
     }
 

@@ -16,7 +16,7 @@ public class WomenPage extends HomePage {
         return driver.findElement(ICON_LOCATOR).isDisplayed();
     }
 
-    public void waitForElementDisplayed() {
+    public void waitForOpenWomenPage() {
         wait.until(ExpectedConditions.visibilityOfElementLocated(ICON_LOCATOR));
     }
 

@@ -13,7 +13,7 @@ public class SearchTest extends BaseTest {
         loginPage.clickLoginButton();
         loginPage.login(userEmail, userPassword);
         searchPage.searchItemToText(ITEM_NAME);
-        searchPage.waitForElementDisplayed();
+        searchPage.waitForSearchItemDisplayed();
         Assert.assertTrue(searchPage.isIconInformationDisplayed(), "Search failed");
     }
 
@@ -21,7 +21,7 @@ public class SearchTest extends BaseTest {
     @Description("Unregistered user product search test")
     public void searchWithoutAuthorizationTest() {
         searchPage.searchItemToText(ITEM_NAME);
-        searchPage.waitForElementDisplayed();
+        searchPage.waitForSearchItemDisplayed();
         Assert.assertTrue(searchPage.isIconInformationDisplayed(), "Search failed");
     }
 
@@ -31,7 +31,7 @@ public class SearchTest extends BaseTest {
         loginPage.clickLoginButton();
         loginPage.login(userEmail, userPassword);
         searchPage.searchItemToText("");
-        searchPage.waitForElementDisplayed();
+        searchPage.waitForSearchItemDisplayed();
         Assert.assertTrue(searchPage.isErrorMessageDisplayed());
         Assert.assertEquals(searchPage.getErrorMessageDisplayed(), "Please enter a search keyword", "Field are empty");
     }

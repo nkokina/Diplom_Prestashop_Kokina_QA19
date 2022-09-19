@@ -80,7 +80,7 @@ public class BasketPage extends HomePage {
         return driver.findElement(TEXT_LOCATOR).isDisplayed();
     }
 
-    public void waitForElementDisplayed() {
+    public void waitForProceedAddressesDisplayed() {
         wait.until(ExpectedConditions.visibilityOfElementLocated(ADDRESS_LOCATOR));
     }
 
