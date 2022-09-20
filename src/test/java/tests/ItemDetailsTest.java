@@ -148,10 +148,10 @@ public class ItemDetailsTest extends BaseTest {
     @DataProvider(name = "userAddAddressesData")
     public Object[][] userAddAddressesData() {
         return new Object[][]{
-                {Addresses.builder().lastName(faker.name().lastName()).firstName(faker.name().firstName()).company(faker.company().name())
+                {Addresses.builder().lastName("Natasha").firstName("Kokina").company("QA19")
                         .address("Minskay").postCode("11111").city("Minsk")
                         .country("21").phone("25588445").mobile("454848485")
-                        .state("13").alias(faker.name().title()).build()},
+                        .state("13").alias("My Addresses").build()},
         };
     }
 }
