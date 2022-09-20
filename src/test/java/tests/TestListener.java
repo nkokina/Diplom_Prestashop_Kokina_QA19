@@ -1,5 +1,6 @@
 package tests;
 
+import io.qameta.allure.Step;
 import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.WebDriver;
 import org.testng.ITestListener;
@@ -19,12 +20,13 @@ public class TestListener implements ITestListener {
         ITestListener.super.onTestSuccess(result);
         log.debug("Test " + result.getName() + " finished");
     }
-
+    @Step("Test = result.getName() failed")
     @Override
     public void onTestFailure(ITestResult result) {
         ITestListener.super.onTestFailure(result);
-        System.out.println("Test " + result.getName() + " failed");
+        log.debug(String.format("Test %s failed", result.getName()));
         WebDriver driver = (WebDriver) result.getTestContext().getAttribute("driver");
         AllureUtils.attachScreenshot(driver);
     }
 }
+

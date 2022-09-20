@@ -10,10 +10,8 @@ import org.testng.annotations.*;
 import page.*;
 import page.modals.NewAddressesModal;
 import page.modals.NewAuthenticationModal;
-
 import java.util.concurrent.TimeUnit;
-
-@Listeners({TestListener.class})
+@Listeners(TestListener.class)
 public class BaseTest {
 
     protected static Faker faker = new Faker();
